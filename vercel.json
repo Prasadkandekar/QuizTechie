@@ -11,10 +11,8 @@
   ],
   "routes": [
     {
-      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|svg|ico|ttf|woff|woff2|eot|otf))",
-      "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
-      }
+      "src": "/data.json",
+      "dest": "/data.json"
     },
     {
       "src": "/(.*)",
