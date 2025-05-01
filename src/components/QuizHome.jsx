@@ -1,82 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Check, X, AlertCircle, ChevronRight, ChevronLeft, RefreshCw } from 'lucide-react';
 
-// Mock data (normally fetched from data.json)
-const mockData = {
-  "quizzes": [
-    {
-      "id": 1,
-      "title": "Web Development Basics",
-      "description": "Test your knowledge of HTML, CSS, and JavaScript fundamentals",
-      "questions": [
-        {
-          "id": 1,
-          "question": "Which HTML tag is used to define an internal style sheet?",
-          "options": ["<script>", "<css>", "<style>", "<link>"],
-          "correctAnswer": "<style>",
-          "explanation": "The <style> tag is used to define style information for a single HTML page."
-        },
-        {
-          "id": 2,
-          "question": "Which CSS property is used to change the text color of an element?",
-          "options": ["color", "text-color", "font-color", "textColor"],
-          "correctAnswer": "color",
-          "explanation": "The color property is used to set the color of the text."
-        },
-        {
-          "id": 3,
-          "question": "What is the correct JavaScript syntax to change the content of an HTML element with id='demo'?",
-          "options": [
-            "document.getElement('demo').innerHTML = 'Hello';", 
-            "document.getElementById('demo').innerHTML = 'Hello';", 
-            "#demo.innerHTML = 'Hello';", 
-            "document.getElementByName('demo').innerHTML = 'Hello';"
-          ],
-          "correctAnswer": "document.getElementById('demo').innerHTML = 'Hello';",
-          "explanation": "The getElementById() method returns the element that has the ID attribute with the specified value."
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "title": "React Fundamentals",
-      "description": "Test your knowledge of React.js core concepts",
-      "questions": [
-        {
-          "id": 1,
-          "question": "What is JSX in React?",
-          "options": [
-            "A JavaScript library", 
-            "A syntax extension for JavaScript that looks similar to HTML", 
-            "A testing framework for React", 
-            "A build tool"
-          ],
-          "correctAnswer": "A syntax extension for JavaScript that looks similar to HTML",
-          "explanation": "JSX stands for JavaScript XML. It allows us to write HTML in React and makes it easier to write and add HTML in React."
-        },
-        {
-          "id": 2,
-          "question": "In React, what is used to pass data to a component from outside?",
-          "options": ["setState", "render with arguments", "props", "PropTypes"],
-          "correctAnswer": "props",
-          "explanation": "Props (short for properties) are used to pass data from one component to another in React."
-        },
-        {
-          "id": 3,
-          "question": "What is the correct way to update the state in a React component?",
-          "options": [
-            "this.state = {count: this.state.count + 1}", 
-            "this.state.count = this.state.count + 1", 
-            "this.setState({count: this.state.count + 1})", 
-            "this.setCount(this.state.count + 1)"
-          ],
-          "correctAnswer": "this.setState({count: this.state.count + 1})",
-          "explanation": "The setState() method is used to update the state in a React component. Direct state mutation should be avoided."
-        }
-      ]
-    }
-  ]
-};
 
 // // In a real app, you would fetch this data
 // const fetchData = () => {
@@ -95,18 +19,17 @@ const mockData = {
 //       });
 //   };
 
-const fetchData = () => {
-    return fetch('/data.json')
-      .then(response => {
+const fetchData = async () => {
+    try {
+        const response = await fetch('/data.json');
         if (!response.ok) {
-          throw new Error(`HTTP error ${response.status}`);
+            throw new Error(`HTTP error ${response.status}`);
         }
-        return response.json();
-      })
-      .catch(error => {
+        return await response.json();
+    } catch (error) {
         console.error('Error loading quiz data:', error);
         throw error;
-      });
+    }
   };
   
 
