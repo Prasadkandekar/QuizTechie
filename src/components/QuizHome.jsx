@@ -86,14 +86,29 @@ const mockData = {
 //     setTimeout(() => resolve(mockData), 500); // Simulate network request
 //   });
 // };
+// const fetchData = () => {
+//     return fetch('/data.json')
+//       .then(response => response.json())
+//       .catch(error => {
+//         console.error('Error loading quiz data:', error);
+//         throw error;
+//       });
+//   };
+
 const fetchData = () => {
     return fetch('/data.json')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error ${response.status}`);
+        }
+        return response.json();
+      })
       .catch(error => {
         console.error('Error loading quiz data:', error);
         throw error;
       });
   };
+  
 
 export default function QuizHome() {
   const [quizzes, setQuizzes] = useState([]);
